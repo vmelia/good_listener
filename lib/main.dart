@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'pages.dart';
+import 'services.dart';
+import 'state.dart';
+
 void main() {
+  configureServices();
+  configureState();
+
   runApp(const MainApp());
 }
 
@@ -9,11 +16,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+        appBar: AppBar(
+          title: const Text('Good Listener', style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.orange,
         ),
+        body: const HomePage(),
       ),
     );
   }
