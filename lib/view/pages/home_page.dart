@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import '../extensions.dart';
-import '../state.dart';
+import '../../contracts.dart';
+import '../../extensions.dart';
+import '../../state.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -29,11 +30,12 @@ class _HomePageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final speechToTextCubit = GetIt.I<SpeechToTextCubit>();
+    final appTheme = GetIt.I<AppTheme>();
     return Column(
       children: [
-        Text(state.helpText),
-        Expanded(child: Text(state.text)),
-        Text(state.confidenceText),
+        Text(state.helpText, style: appTheme.helpTextStyle.textStyle),
+        Expanded(child: Text(state.text, style: appTheme.mainTextStyle.textStyle)),
+        Text(state.confidenceText, style: appTheme.confidenceTextStyle.textStyle),
         FloatingActionButton(
           onPressed: () => speechToTextCubit.toggleListening(),
           child: Icon(

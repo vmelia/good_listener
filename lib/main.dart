@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'pages.dart';
 import 'services.dart';
 import 'state.dart';
+import 'view.dart';
 
 void main() {
   configureServices();
   configureState();
+  configureView();
 
   runApp(const MainApp());
 }
