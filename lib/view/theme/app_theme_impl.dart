@@ -23,5 +23,5 @@ class AppThemeImpl implements AppTheme {
 
   @override
   AppTextStyle get confidenceTextStyle =>
-      mainTextStyle.copyWith(textStyle: _textStyle.copyWith(fontWeight: FontWeight.w100));
+      mainTextStyle.copyWith(textStyle: _textStyle.copyWith(fontWeight: FontWeight.w300));
 }

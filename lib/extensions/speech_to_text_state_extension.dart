@@ -8,7 +8,11 @@ extension SpeechToTextStateExtension on SpeechToTextState {
       return 'Speech not available.';
     }
 
-    return listening ? 'Listening...' : 'Tap the microphone button to start listening.';
+    if (listening || confidence == -1) {
+      return 'Listening...';
+    }
+
+    return 'Tap the microphone button to start listening.';
   }
 
   String get confidenceText {
