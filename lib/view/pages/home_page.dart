@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import '../../contracts.dart';
 import '../../extensions.dart';
 import '../../state.dart';
+import '../../view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -32,10 +33,25 @@ class _HomePageView extends StatelessWidget {
     final speechToTextCubit = GetIt.I<SpeechToTextCubit>();
     final appTheme = GetIt.I<AppTheme>();
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(state.helpText, style: appTheme.helpTextStyle.textStyle),
-        Expanded(child: Text(state.text, style: appTheme.mainTextStyle.textStyle)),
-        Text(state.confidenceText, style: appTheme.confidenceTextStyle.textStyle),
+        TextWithBorder(
+          text: state.helpText,
+          textStyle: appTheme.helpTextStyle.textStyle,
+          colour: Colors.red,
+        ),
+        Expanded(
+          child: TextWithBorder(
+            text: state.text,
+            textStyle: appTheme.mainTextStyle.textStyle,
+            colour: Colors.blue,
+          ),
+        ),
+        TextWithBorder(
+          text: state.confidenceText,
+          textStyle: appTheme.confidenceTextStyle.textStyle,
+          colour: Colors.green,
+        ),
         FloatingActionButton(
           onPressed: () => speechToTextCubit.toggleListening(),
           child: Icon(

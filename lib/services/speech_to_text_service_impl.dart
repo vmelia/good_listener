@@ -16,7 +16,7 @@ class SpeechToTextServiceImpl implements SpeechToTextService {
 
   @override
   Future<void> listen() async {
-    await _speechToText.listen(onResult: _onSpeechResult);
+      await _speechToText.listen(onResult: _onSpeechResult);
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
