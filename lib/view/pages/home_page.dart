@@ -12,11 +12,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final speechToTextCubit = GetIt.I<SpeechToTextCubit>()..initialize();
+    final speechToTextCubit = GetIt.I<SpeechCubit>()..initialize();
 
     return BlocProvider(
       create: (BuildContext context) => speechToTextCubit,
-      child: BlocBuilder<SpeechToTextCubit, SpeechToTextState>(
+      child: BlocBuilder<SpeechCubit, SpeechState>(
         bloc: speechToTextCubit,
         builder: (context, state) => _HomePageView(state: state),
       ),
@@ -26,11 +26,11 @@ class HomePage extends StatelessWidget {
 
 class _HomePageView extends StatelessWidget {
   const _HomePageView({required this.state});
-  final SpeechToTextState state;
+  final SpeechState state;
 
   @override
   Widget build(BuildContext context) {
-    final speechToTextCubit = GetIt.I<SpeechToTextCubit>();
+    final speechToTextCubit = GetIt.I<SpeechCubit>();
     final appTheme = GetIt.I<AppTheme>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

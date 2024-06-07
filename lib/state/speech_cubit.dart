@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../contracts.dart';
 
-class SpeechToTextState extends Equatable {
-  const SpeechToTextState({
+class SpeechState extends Equatable {
+  const SpeechState({
     this.initialized = false,
     this.listening = false,
     this.text = '',
@@ -19,14 +19,16 @@ class SpeechToTextState extends Equatable {
   List<Object?> get props => [initialized, listening, text, confidence];
 }
 
-class SpeechToTextCubit extends Cubit<SpeechToTextState> {
-  SpeechToTextCubit(this.speechToTextService) : super(const SpeechToTextState());
-
+class SpeechCubit extends Cubit<SpeechState> {
+  SpeechCubit(this.speechToTextService, this.textToSpeechService) : super(const SpeechState());
   final SpeechToTextService speechToTextService;
+  final TextToSpeechService textToSpeechService;
 
   Future<void> initialize() async {
     final initialized = await speechToTextService.initialize(onTextReceived: _onTextReceived);
-    emit(SpeechToTextState(
+    textToSpeechService.initialize();
+
+    emit(SpeechState(
       initialized: initialized,
       listening: false,
     ));
@@ -35,20 +37,24 @@ class SpeechToTextCubit extends Cubit<SpeechToTextState> {
   Future<void> toggleListening() async {
     if (!state.listening) {
       await speechToTextService.listen();
-      emit(SpeechToTextState(
+      emit(SpeechState(
         initialized: state.initialized,
         listening: true,
       ));
     } else {
-      emit(SpeechToTextState(
+      emit(SpeechState(
         initialized: state.initialized,
         listening: false,
       ));
     }
   }
 
-  void _onTextReceived({required double confidence, required String text}) {
-    emit(SpeechToTextState(
+  void _onTextReceived({required double confidence, required String text}) async {
+    if (confidence > 0.0) {
+      await textToSpeechService.speak(text);
+    }
+
+    emit(SpeechState(
       initialized: state.initialized,
       listening: false,
       text: text,

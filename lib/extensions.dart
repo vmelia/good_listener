@@ -1,1 +1,1 @@
-export "extensions/speech_to_text_state_extension.dart";
+export "extensions/speech_state_extension.dart";

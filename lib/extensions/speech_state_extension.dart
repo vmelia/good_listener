@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../state.dart';
 
-extension SpeechToTextStateExtension on SpeechToTextState {
+extension SpeechStateExtension on SpeechState {
   String get helpText {
     if (!initialized) {
       return 'Speech not available.';
