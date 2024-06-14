@@ -10,10 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   get_it: ^7.7.0
-  flutter_bloc: ^8.1.5
+  flutter_bloc: ^8.1.6
   equatable: ^2.0.5
   speech_to_text: ^6.6.1
-  # text_to_speech: ^0.2.3
   flutter_tts: ^4.0.2
 
 dev_dependencies:
